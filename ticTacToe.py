@@ -1,4 +1,10 @@
 def printBoard(board):
+    print(board['top-L']+ '|'+ board['top-M']+ '|'+ board['top-R'])
+    print('-+-+-')
+    print(board['mid-L']+ '|'+ board['mid-M']+ '|'+ board['mid-R'])
+    print('-+-+-')
+    print(board['low-L']+ '|'+ board['low-M']+ '|'+ board['low-R'])
+
     # TO DO #################################################################
     # Write code in this function that prints the game board.               #
     # The code in this function should only print, the user should NOT      #
@@ -9,7 +15,15 @@ def printBoard(board):
 
 def checkWinner(board, player):    
     print('Checking if ' + player + ' is a winner...')
-    
+    return ((board['top-L']== player and board['top-M']== player and board['top-R']== player) or
+            (board['mid-L']== player and board['mid-M']== player and board['mid-R']== player) or
+            (board['low-L']== player and board['low-M']== player and board['low-R']== player) or
+            (board['low-L']== player and board['mid-M']== player and board['top-R']== player) or
+            (board['top-L']== player and board['mid-M']== player and board['low-R']== player) or
+            (board['top-L']== player and board['mid-L']== player and board['low-L']== player) or
+            (board['top-M']== player and board['mid-M']== player and board['low-M']== player) or
+            (board['top-R']== player and board['mid-R']== player and board['low-R']== player))
+
     # TO DO #################################################################
     # Write code in this function that checks the tic-tac-toe board          #
     # to determine if the player stored in variable 'player' currently      #
@@ -26,13 +40,13 @@ def startGame(startingPlayer, board):
     # is happening. You do not need to modify any of the Python code        #
     #########################################################################
 
-    turn = startingPlayer
+    turn = startingPlayer      #this start game and start off the player who wants to be X or O.
     for i in range(9):
-        printBoard(board)
-        print('Turn for ' + turn + '. Move on which space?')
+        printBoard(board) #prints the board to start the game
+        print('Turn for ' + turn + '. Move on which space?')# computer will ask the player to pick where they want to put their,X and, O.
         move = input()
         board[move] = turn
-        if( checkWinner(board, 'X') ):
+        if( checkWinner(board, 'X') ):# If three X's in a row that player wins, same for O's.
             print('X wins!')
             break
         elif ( checkWinner(board, 'O') ):
@@ -44,5 +58,5 @@ def startGame(startingPlayer, board):
         else:
             turn = 'X'
         
-    printBoard(board)
+    printBoard(board) #this will reprint the board with the X and O from the players. 
     
